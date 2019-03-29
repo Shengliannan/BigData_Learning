@@ -258,6 +258,9 @@
 火车票购买、银行转账、网上购物
 
 ### Zookeeper架构
+
+（一致，有头，数据树）
+
 ZAB协议
 ZAB（ZooKeeper Atomic Broadcast,Zookeeper原子消息广播协议）
 ZAB协议包括两种基本模式
@@ -283,3 +286,61 @@ Zookeeper节点——
 - 数据存储
 
 P179
+
+
+
+## Zookeeper作用
+
+- 解决分布式系统数据一致性问题（Consistency ACID）
+
+- 配置一致
+
+- HA（主备动态切换）
+
+  eg：master启动后，在zk上注册一个临时节点，另外一个standby监听这个节点，如果监听到节点消失，也就意味着master已经down，然后standby变为active，在zk上注册自己的信息。
+
+- pub/sub
+
+- naming service
+
+- load banlance
+
+- 分布式锁
+
+## Zookeeper配置
+
+两个端口号：
+
+第一个端口号：Leader与Follower通信端口号
+
+第二个端口号：选举的端口号
+
+
+
+
+
+## Zookeeper问题
+
+1. 目前ZooKeeper不支持动态添加节点，添加节点需要重启所有ZooKeeper
+2. ZooKeeper 添加、删除主要修改zoo.cfg文件，zoo.cfg文件需要备份保存好
+3. Namenode 的主备高可用依赖ZooKeeper，所以需要修改hdfs-site.xml
+4. Resouremanager的主备高可用依赖ZooKeeper，需要修改yarn-site.xml
+5. HBase的主备高可用依赖ZooKeeper，需要修改HBase-site.xml
+6. 如果有Hive、Flume也需要修改相关的配置
+7. 因为生产环境刚上线，所以直接重启了集群服务，如果实时性要求比较高，没有维护窗口，可以单独重启相关服务，尽可能减少影响。
+
+
+
+## Zookeeper权限管理
+
+ACL
+
+
+
+## Zookeeper的应用
+
+1. zk+dubbo
+
+   服务注册，服务发现
+
+   
