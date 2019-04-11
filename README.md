@@ -268,5 +268,9 @@ Time taken: 0.189 seconds, Fetched: 1 row(s)
 
 12. group by 后面多个字段
 
-    
+      
+
+13. 设计表结构
+
+14. 
 
